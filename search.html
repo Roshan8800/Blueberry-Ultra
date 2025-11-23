@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search - Blueberry</title>
+    <link rel="stylesheet" href="src/styles/main.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="/">Blueberry</a>
+            </div>
+            <search-bar></search-bar>
+            <button class="hamburger" id="hamburger-menu">☰</button>
+        </nav>
+    </header>
+
+    <navigation-drawer id="nav-drawer"></navigation-drawer>
+
+    <main>
+        <section class="search-header">
+            <h1 id="search-title">Search Results</h1>
+            <div class="filters-bar">
+                <div class="sort-options">
+                    <label for="sort-select">Sort by:</label>
+                    <select id="sort-select">
+                        <option value="relevance">Relevance</option>
+                        <option value="date">Date</option>
+                        <option value="views">Views</option>
+                    </select>
+                </div>
+                <div class="filter-options">
+                    <button id="advanced-filters-btn">Advanced Filters</button>
+                </div>
+            </div>
+            <div class="advanced-filters" id="advanced-filters" style="display: none;">
+                <label for="duration-filter">Duration:</label>
+                <select id="duration-filter">
+                    <option value="">Any</option>
+                    <option value="short">Short (< 5 min)</option>
+                    <option value="medium">Medium (5-20 min)</option>
+                    <option value="long">Long (> 20 min)</option>
+                </select>
+                <label for="category-filter">Category:</label>
+                <input type="text" id="category-filter" placeholder="Filter by category">
+                <button id="apply-filters-btn">Apply</button>
+            </div>
+        </section>
+
+        <section class="results-section">
+            <div class="results-info" id="results-info">
+                <!-- Results count will be shown here -->
+            </div>
+            <div class="grid-container" id="results-grid">
+                <!-- Search results will be dynamically inserted here -->
+            </div>
+            <div class="pagination" id="pagination">
+                <!-- Pagination will be dynamically inserted here -->
+            </div>
+            <div class="no-results" id="no-results" style="display: none;">
+                <h2>No videos found</h2>
+                <p>Try different keywords or browse categories.</p>
+                <a href="categories.html">Browse Categories</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Blueberry. All rights reserved.</p>
+    </footer>
+
+    <script type="module" src="src/components/search-bar.js"></script>
+    <script src="src/components/video-thumbnail.js"></script>
+    <script type="module" src="src/components/navigation-drawer.js"></script>
+    <script src="src/pages/search.js"></script>
+</body>
+</html>

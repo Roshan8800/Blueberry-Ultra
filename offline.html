@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline - Blueberry</title>
+    <link rel="stylesheet" href="src/styles/main.css">
+</head>
+<body class="offline-page">
+    <main class="offline-container">
+        <div class="offline-indicator">
+            <h1>You're Offline</h1>
+            <p>No internet connection detected. Some features may not be available.</p>
+        </div>
+
+        <div class="cached-content">
+            <h2>Cached Content</h2>
+            <p>Here are some videos available offline:</p>
+            <div class="cached-grid" id="cached-grid">
+                <!-- Cached videos will be loaded here -->
+            </div>
+            <p id="no-cached">No cached content available.</p>
+        </div>
+
+        <div class="actions">
+            <button id="retry-btn" class="btn-primary">Retry Connection</button>
+            <a href="/" class="btn-secondary">Go to Home</a>
+        </div>
+    </main>
+
+    <script>
+        // Check online status
+        function updateOnlineStatus() {
+            if (navigator.onLine) {
+                window.location.href = '/';
+            }
+        }
+
+        window.addEventListener('online', updateOnlineStatus);
+
+        document.getElementById('retry-btn').addEventListener('click', () => {
+            if (navigator.onLine) {
+                window.location.href = '/';
+            } else {
+                alert('Still offline. Please check your connection.');
+            }
+        });
+
+        // Load cached videos from localStorage (placeholder)
+        const cachedVideos = JSON.parse(localStorage.getItem('cached-videos')) || [];
+        const cachedGrid = document.getElementById('cached-grid');
+        const noCached = document.getElementById('no-cached');
+
+        if (cachedVideos.length > 0) {
+            noCached.style.display = 'none';
+            cachedVideos.forEach(video => {
+                const card = document.createElement('div');
+                card.className = 'video-card';
+                card.innerHTML = `
+                    <img src="${video.thumbnail}" alt="${video.title}">
+                    <h3>${video.title}</h3>
+                    <p>${video.duration}</p>
+                `;
+                card.addEventListener('click', () => {
+                    // Play cached video or something
+                    alert('Playing cached video: ' + video.title);
+                });
+                cachedGrid.appendChild(card);
+            });
+        } else {
+            cachedGrid.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Blueberry</title>
+    <link rel="stylesheet" href="src/styles/main.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="/">Blueberry</a>
+            </div>
+            <search-bar></search-bar>
+            <button class="hamburger" id="hamburger-menu">☰</button>
+        </nav>
+    </header>
+
+    <navigation-drawer id="nav-drawer"></navigation-drawer>
+
+    <main class="about-container">
+        <section class="hero-section">
+            <h1>About Blueberry</h1>
+            <p>Blueberry is a premium, modern adult video streaming platform that aggregates high-quality content from Pornhub. We provide a clean, professional interface for discovering and enjoying adult entertainment with features like advanced search, categories, and personalized recommendations.</p>
+        </section>
+
+        <section class="disclaimer-section">
+            <h2>Content Disclaimer</h2>
+            <p>Content Disclaimer: Blueberry is an aggregator website that displays embedded videos sourced from Pornhub. We do not create, host, upload, or own any of the adult content displayed on this site. All videos are provided by third-party platforms and services. Blueberry is not intended for content creators or users looking to upload their own material. This site is solely for viewing embedded content from external sources.</p>
+        </section>
+
+        <section class="team-section">
+            <h2>Meet the Team</h2>
+            <div class="team-members">
+                <div class="team-member">
+                    <h3>Roshan Sahu</h3>
+                    <p>Frontend Developer</p>
+                </div>
+                <div class="team-member">
+                    <h3>Papun Sahu</h3>
+                    <p>Data Integration Specialist</p>
+                </div>
+                <div class="team-member">
+                    <h3>Rohan Sahu</h3>
+                    <p>Testing & Performance Optimization</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq-section">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-accordion">
+                <div class="faq-item">
+                    <button class="faq-question">What is Blueberry?</button>
+                    <div class="faq-answer">
+                        <p>Blueberry is a video streaming platform that aggregates adult content from Pornhub, providing a user-friendly interface for browsing and watching videos.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Is the content free?</button>
+                    <div class="faq-answer">
+                        <p>Yes, all content on Blueberry is free to access, as it embeds videos directly from Pornhub.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Do I need to create an account?</button>
+                    <div class="faq-answer">
+                        <p>While you can browse without an account, creating one allows you to save favorites, view history, and personalize your experience.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Is my data safe?</button>
+                    <div class="faq-answer">
+                        <p>We prioritize user privacy and do not collect personal data beyond what's necessary for account functionality. All data is stored securely.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">How can I contact support?</button>
+                    <div class="faq-answer">
+                        <p>You can reach out to us via email at support@blueberry.com or through our contact form below.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-section">
+            <h2>Contact Us</h2>
+            <p>If you have any questions, feedback, or need support, feel free to reach out:</p>
+            <div class="contact-info">
+                <p><strong>Email:</strong> support@blueberry.com</p>
+                <p><strong>Address:</strong> 123 Blueberry Lane, Internet City, IC 12345</p>
+            </div>
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Blueberry. All rights reserved. | <a href="terms.html">Terms of Service</a> | <a href="privacy.html">Privacy Policy</a></p>
+    </footer>
+
+    <script type="module" src="src/components/search-bar.js"></script>
+    <script type="module" src="src/components/navigation-drawer.js"></script>
+    <script src="src/pages/about.js"></script>
+</body>
+</html>

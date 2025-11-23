@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Player - Blueberry</title>
+    <link rel="stylesheet" href="src/styles/main.css">
+    <link rel="stylesheet" href="video.css">
+</head>
+<body>
+    <header class="video-header">
+        <button class="back-button" onclick="history.back()">← Back</button>
+        <h1 class="video-title-header"></h1>
+        <button class="hamburger-menu" id="hamburger-menu">☰</button>
+    </header>
+
+    <navigation-drawer id="nav-drawer"></navigation-drawer>
+
+    <main class="video-page-container">
+        <div class="video-player-section">
+            <error-boundary>
+                <video-player embed=""></video-player>
+            </error-boundary>
+            <div class="video-metadata">
+                <h1 class="video-title"></h1>
+                <div class="video-stats">
+                    <span class="views"></span>
+                    <span class="likes"></span>
+                    <button id="share-btn" class="share-btn" aria-label="Share video">📤 Share</button>
+                    <button id="favorite-btn" class="favorite-btn">❤️ Add to Favorites</button>
+                </div>
+                <div id="share-dropdown" class="share-dropdown" hidden>
+                    <button class="share-option" data-platform="facebook" aria-label="Share on Facebook">📘 Facebook</button>
+                    <button class="share-option" data-platform="twitter" aria-label="Share on Twitter">🐦 Twitter</button>
+                    <button class="share-option" data-platform="whatsapp" aria-label="Share on WhatsApp">💬 WhatsApp</button>
+                    <button class="share-option" data-platform="copy" aria-label="Copy link">🔗 Copy Link</button>
+                </div>
+                <div class="video-tags"></div>
+                <p class="video-description"></p>
+            </div>
+            <div class="below-player-recommendations">
+                <h2>You Might Also Like</h2>
+                <div class="recommendations-grid" id="below-player-recommendations-grid"></div>
+            </div>
+        </div>
+        <aside class="related-videos-section">
+            <h2>More Recommendations</h2>
+            <div class="related-videos-grid" id="related-videos-grid"></div>
+        </aside>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Blueberry. All rights reserved.</p>
+    </footer>
+
+    <script src="src/components/error-boundary.js"></script>
+    <script src="src/components/video-player.js"></script>
+    <script type="module" src="src/components/navigation-drawer.js"></script>
+    <script src="src/pages/video.js"></script>
+</body>
+</html>

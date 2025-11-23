@@ -1,0 +1,247 @@
+:root {
+  --primary-color: #1a1a2e;
+  --secondary-color: #16213e;
+  --text-color: #ffffff;
+  --gray-color: #b0b0b0;
+  --background-color: #0f0f0f;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromBottom {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutToBottom {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes buttonPress {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes progressFill {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes staggeredFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes parallax {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Page load fade-in */
+@media (prefers-reduced-motion: no-preference) {
+  body {
+    animation: fadeIn 0.3s ease;
+  }
+}
+
+/* Entrance animations */
+@media (prefers-reduced-motion: no-preference) {
+  .fade-in {
+    animation: fadeIn 0.3s ease;
+  }
+
+  .slide-in-bottom {
+    animation: slideInFromBottom 0.4s ease-out;
+  }
+
+  .slide-out-bottom {
+    animation: slideOutToBottom 0.3s ease-in;
+  }
+
+  .fade-out {
+    animation: fadeOut 0.2s ease;
+  }
+}
+
+/* Micro animations */
+@media (prefers-reduced-motion: no-preference) {
+  .button-press {
+    transition: transform 0.1s ease;
+  }
+
+  .button-press:active {
+    animation: buttonPress 0.1s ease;
+  }
+
+  .spinner {
+    animation: spin 1s linear infinite;
+  }
+
+  .progress-bar-fill {
+    animation: progressFill 2s ease-in-out;
+  }
+}
+
+/* Scroll-triggered animations */
+@media (prefers-reduced-motion: no-preference) {
+  .staggered-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .staggered-item.animate {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .parallax-bg {
+    transition: transform 0.1s ease;
+  }
+}
+
+/* Age Restriction Overlay */
+.age-restriction-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+}
+
+.age-restriction-content {
+    background-color: var(--secondary-color);
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.age-restriction-content h1 {
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.age-restriction-content p {
+    color: var(--gray-color);
+    margin-bottom: 2rem;
+    line-height: 1.5;
+}
+
+.age-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.age-button {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    min-width: 150px;
+}
+
+.age-button.confirm {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+}
+
+.age-button.confirm:hover,
+.age-button.confirm:focus-visible {
+    background-color: rgba(26, 26, 46, 0.8);
+}
+
+.age-button.deny {
+    background-color: var(--gray-color);
+    color: var(--background-color);
+}
+
+.age-button.deny:hover,
+.age-button.deny:focus-visible {
+    background-color: rgba(176, 176, 176, 0.8);
+}
+
+/* Cookie Consent Banner */
+.cookie-consent-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+   

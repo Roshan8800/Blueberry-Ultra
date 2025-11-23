@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Blueberry</title>
+    <link rel="stylesheet" href="src/styles/main.css">
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="/">Blueberry</a>
+            </div>
+            <button class="hamburger" id="hamburger-menu">☰</button>
+        </nav>
+    </header>
+
+    <navigation-drawer id="nav-drawer"></navigation-drawer>
+
+    <main class="profile-container">
+        <div class="profile-header">
+            <div class="avatar">
+                <img id="user-avatar" src="src/assets/images/default-avatar.png" alt="User Avatar">
+            </div>
+            <div class="user-info">
+                <h1 id="user-email">Loading...</h1>
+                <button id="logout-btn" class="logout-btn">Logout</button>
+            </div>
+        </div>
+
+        <div class="profile-tabs">
+            <button class="tab-btn active" data-tab="history">Watch History</button>
+            <button class="tab-btn" data-tab="favorites">Favorites</button>
+            <button class="tab-btn" data-tab="settings">Settings</button>
+        </div>
+
+        <div class="tab-content">
+            <div id="history-tab" class="tab-pane active">
+                <h2>Watch History</h2>
+                <div id="history-grid" class="video-grid">
+                    <!-- History videos will be loaded here -->
+                </div>
+            </div>
+
+            <div id="favorites-tab" class="tab-pane">
+                <h2>Favorites</h2>
+                <div id="favorites-grid" class="video-grid">
+                    <!-- Favorite videos will be loaded here -->
+                </div>
+            </div>
+
+            <div id="settings-tab" class="tab-pane">
+                <h2>Settings</h2>
+                <form id="settings-form">
+                    <bb-select label="Theme" id="theme" name="theme" options='[{"value":"dark","label":"Dark"},{"value":"light","label":"Light"}]' required></bb-select>
+                    <bb-checkbox label="Autoplay" id="autoplay" name="autoplay"></bb-checkbox>
+                    <bb-checkbox label="Notifications" id="notifications" name="notifications"></bb-checkbox>
+                    <button type="submit" class="save-btn">Save Settings</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script type="module" src="src/components/form-elements.js"></script>
+    <script type="module" src="src/components/navigation-drawer.js"></script>
+    <script type="module" src="src/components/modal.js"></script>
+    <script src="src/components/loading-spinner.js"></script>
+    <script type="module" src="src/pages/profile.js"></script>
+</body>
+</html>

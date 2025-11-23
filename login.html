@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Blueberry</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <h1>Sign In</h1>
+            <form id="login-form">
+                <bb-input label="Email" required>
+                    <input type="email" id="email">
+                </bb-input>
+                <bb-input label="Password" required>
+                    <input type="password" id="password">
+                </bb-input>
+                <button type="submit" class="login-button">Sign In</button>
+                <div class="form-switch">
+                    <p>New to Blueberry? <a href="#" id="show-register">Sign up now</a>.</p>
+                </div>
+            </form>
+
+            <form id="register-form" class="hidden">
+                <h1>Sign Up</h1>
+                <bb-input label="Email" required>
+                    <input type="email" id="register-email">
+                </bb-input>
+                <bb-input label="Password" required minlength="6">
+                    <input type="password" id="register-password">
+                </bb-input>
+                <button type="submit" class="login-button">Sign Up</button>
+                <div class="form-switch">
+                    <p>Have an account? <a href="#" id="show-login">Sign in now</a>.</p>
+                </div>
+            </form>
+            <div id="error-message" class="error-message"></div>
+        </div>
+    </div>
+    <script type="module" src="src/components/form-elements.js"></script>
+    <script type="module" src="src/pages/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,252 @@
+/* Video Header */
+.video-header {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background: #0f0f0f;
+    border-bottom: 1px solid #333;
+    position: relative;
+}
+
+.back-button {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-right: 1rem;
+}
+
+.video-title-header {
+    flex-grow: 1;
+    font-size: 1.2rem;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.hamburger-menu {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.nav-drawer {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #1a1a1a;
+    width: 200px;
+    display: none;
+    z-index: 100;
+}
+
+.nav-drawer.active {
+    display: block;
+}
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-links li {
+    border-bottom: 1px solid #333;
+}
+
+.nav-links a {
+    display: block;
+    padding: 1rem;
+    color: #fff;
+    text-decoration: none;
+}
+
+.nav-links a:hover {
+    background: #333;
+}
+
+/* Main Container */
+.video-page-container {
+    display: flex;
+    padding: 2rem;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.video-player-section {
+    flex: 1 1 70%;
+}
+
+.related-videos-section {
+    flex: 0 0 30%;
+    min-width: 300px;
+}
+
+.video-metadata {
+    margin-top: 1.5rem;
+}
+
+.video-title {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
+}
+
+.video-stats {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #aaa;
+    align-items: center;
+    position: relative;
+}
+
+.share-btn, .favorite-btn {
+    background: #333;
+    border: none;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+}
+
+.share-btn:hover, .favorite-btn:hover {
+    background: #555;
+}
+
+.share-btn:focus, .favorite-btn:focus {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+}
+
+.share-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    z-index: 100;
+    min-width: 150px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    margin-top: 0.5rem;
+}
+
+.share-dropdown[hidden] {
+    display: none;
+}
+
+.share-option {
+    background: none;
+    border: none;
+    color: #fff;
+    padding: 0.5rem;
+    text-align: left;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+}
+
+.share-option:hover {
+    background: #333;
+}
+
+.share-option:focus {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+}
+
+.video-tags {
+    margin-bottom: 1rem;
+}
+
+.video-tags span {
+    display: inline-block;
+    background: #333;
+    padding: 0.25rem 0.5rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    color: #fff;
+}
+
+.video-description {
+    font-size: 1rem;
+    color: #aaa;
+    line-height: 1.5;
+}
+
+.related-videos-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.related-videos-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.below-player-recommendations {
+    margin-top: 2rem;
+}
+
+.below-player-recommendations h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.recommendations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .video-page-container {
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .video-header {
+        padding: 0.5rem 1rem;
+    }
+
+    .video-title-header {
+        font-size: 1rem;
+    }
+
+    .related-videos-section {
+        flex: none;
+        width: 100%;
+    }
+
+    .related-videos-grid {
+        display: flex;
+        overflow-x: auto;
+        gap: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    .related-videos-grid video-thumbnail {
+        flex: 0 0 200px;
+    }
+
+    .video-

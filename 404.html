@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found - Blueberry</title>
+    <link rel="stylesheet" href="src/styles/main.css">
+</head>
+<body class="error-page">
+    <main class="error-container">
+        <div class="error-illustration">
+            <h1>404</h1>
+            <p>Oops! The page you're looking for doesn't exist.</p>
+        </div>
+
+        <div class="error-content">
+            <h2>Page Not Found</h2>
+            <p>The page you are trying to access might have been moved, deleted, or you entered the wrong URL.</p>
+
+            <div class="search-section">
+                <h3>Search for Content</h3>
+                <search-bar></search-bar>
+            </div>
+
+            <div class="navigation-links">
+                <a href="/" class="btn-primary">Go to Home</a>
+                <a href="/categories.html" class="btn-secondary">Browse Categories</a>
+                <button onclick="history.back()" class="btn-secondary">Go Back</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="src/components/search-bar.js"></script>
+</body>
+</html>

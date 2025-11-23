@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Blueberry</title>
+    <link rel="stylesheet" href="src/styles/main.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="/">Blueberry</a>
+            </div>
+            <search-bar></search-bar>
+            <button class="hamburger" id="hamburger-menu">☰</button>
+        </nav>
+    </header>
+
+    <navigation-drawer id="nav-drawer"></navigation-drawer>
+
+    <main class="settings-container">
+        <aside class="settings-sidebar">
+            <h2>Settings</h2>
+            <nav>
+                <ul>
+                    <li><a href="#general" class="settings-tab active" data-tab="general">General</a></li>
+                    <li><a href="#playback" class="settings-tab" data-tab="playback">Playback</a></li>
+                    <li><a href="#privacy" class="settings-tab" data-tab="privacy">Privacy</a></li>
+                    <li><a href="#notifications" class="settings-tab" data-tab="notifications">Notifications</a></li>
+                    <li><a href="#shortcuts" class="settings-tab" data-tab="shortcuts">Keyboard Shortcuts</a></li>
+                    <li><a href="#parental-controls" class="settings-tab" data-tab="parental-controls">Parental Controls</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <section class="settings-content">
+            <div id="general-tab" class="settings-tab-content active">
+                <h3>General</h3>
+                <form id="general-form">
+                    <bb-select label="Theme" id="theme" name="theme" options='[{"value":"dark","label":"Dark"},{"value":"light","label":"Light"}]' required></bb-select>
+                    <bb-select label="Language" id="language" name="language" options='[{"value":"en","label":"English"},{"value":"es","label":"Spanish"},{"value":"fr","label":"French"}]' required></bb-select>
+                    <button type="submit" class="save-btn">Save</button>
+                </form>
+            </div>
+
+            <div id="playback-tab" class="settings-tab-content">
+                <h3>Playback</h3>
+                <form id="playback-form">
+                    <bb-checkbox label="Autoplay" id="autoplay" name="autoplay"></bb-checkbox>
+                    <bb-select label="Default Quality" id="quality" name="quality" options='[{"value":"auto","label":"Auto"},{"value":"hd","label":"HD"},{"value":"sd","label":"SD"}]' required></bb-select>
+                    <div class="setting-group">
+                        <label for="volume">Default Volume:</label>
+                        <input type="range" id="volume" name="volume" min="0" max="100" value="50">
+                        <span id="volume-value">50</span>
+                    </div>
+                    <button type="submit" class="save-btn">Save</button>
+                </form>
+            </div>
+
+            <div id="privacy-tab" class="settings-tab-content">
+                <h3>Privacy</h3>
+                <form id="privacy-form">
+                    <bb-checkbox label="Allow Analytics" id="analytics" name="analytics"></bb-checkbox>
+                    <bb-checkbox label="Data Sharing" id="data-sharing" name="data-sharing"></bb-checkbox>
+                    <div class="setting-group">
+                        <bb-checkbox label="Accept Cookies" id="cookies" name="cookies" checked disabled></bb-checkbox>
+                        <small>Required for functionality</small>
+                    </div>
+                    <button type="submit" class="save-btn">Save</button>
+                </form>
+            </div>
+
+            <div id="notifications-tab" class="settings-tab-content">
+                <h3>Notifications</h3>
+                <form id="notifications-form">
+                    <bb-checkbox label="Browser Notifications" id="browser-notifications" name="browser-notifications"></bb-checkbox>
+                    <bb-checkbox label="Email Notifications" id="email-notifications" name="email-notifications"></bb-checkbox>
+                    <bb-select label="Notification Frequency" id="frequency" name="frequency" options='[{"value":"daily","label":"Daily"},{"value":"weekly","label":"Weekly"},{"value":"never","label":"Never"}]' required></bb-select>
+                    <button type="submit" class="save-btn">Save</button>
+                </form>
+            </div>
+
+            <div id="shortcuts-tab" class="settings-tab-content">
+                <h3>Keyboard Shortcuts</h3>
+                <p>Use these keyboard shortcuts to navigate and control playback:</p>
+                <div class="shortcuts-list">
+                    <div class="shortcut-item">
+                        <kbd>Space</kbd>
+                        <span>Play/Pause video</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <kbd>↑</kbd> <kbd>↓</kbd> <kbd>←</kbd> <kbd>→</kbd>
+                        <span>Navigate grids</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <kbd>Enter</kbd>
+                        <span>Select/Play current item</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <kbd>Escape</kbd>
+                        <span>Go back or close modals</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <kbd>F</kbd>
+                        <span>Toggle fullscreen</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <kbd>/</kbd>
+                        <span>Focus search input</span>
+                    </div>
+                </div>
+                <p><em>Note: Shortcuts are disabled when typing in input fields.</em></p>
+            </div>
+
+            <div id="parental-controls-tab" class="settings-tab-content">
+                <h3>Parental Controls</h3>
+                <form id="parental-controls-form">
+                    <bb-checkbox label="Enable Parental Controls" id="parental-enabled" name="parental-enabled"></bb-checkbox>
+                    <div class="setting-group">
+                        <label for="current-pin">Current PIN:</label>
+                        <input type="password" id="current-pin" name="current-pin" maxlength="4" pattern="[0-9]{4}" placeholder="Enter current PIN">
+                    </div>
+                    <div class="setting-group">
+                        <label for="new-pin">New PIN:</label>
+                        <input type="password" id="new-pin" name="new-pin" maxlength="4" pattern="[0-9]{4}" placeholder="Enter new 4-digit PIN">
+                    </div>
+                    <div class="setting-group">
+                        <label for="confirm-pin">Confirm PIN:</label>
+                        <input type="password" id="confirm-pin" name="confirm-pin" maxlength="4" pattern="[0-9]{4}" placeholder="Confirm new PIN">
+                    </div>
+                    <button type="submit" class="save-btn">Save</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Blueberry. All rights reserved.</p>
+    </footer>
+
+    <script type="module" src="src/components/form-elements.js"></script>
+    <script type="module" src="src/components/search-bar.js"></script>
+    <script type="module" src="src/components/navigation-drawer.js"></script>
+    <script type="module" src="src/components/modal.js"></script>
+    <script src="src/pages/settings.js"></script>
+</body>
+</html>

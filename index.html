@@ -1,14 +1,88 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blueberry - Adult Video Streaming</title>
+    <link rel="preload" href="src/styles/main.css" as="style">
+    <link rel="stylesheet" href="src/styles/main.css">
+    <link rel="preload" href="src/components/video-thumbnail.js" as="script">
+    <link rel="preload" href="src/pages/home.js" as="script">
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
-</body>
-</html>
+    <div id="age-restriction-overlay" class="age-restriction-overlay" style="display: none;" role="dialog" aria-labelledby="age-warning-title" aria-describedby="age-warning-desc" aria-modal="true">
+        <div class="age-restriction-content">
+            <h1 id="age-warning-title">Age Restriction</h1>
+            <p id="age-warning-desc">This website contains adult content. You must be 18 years or older to access this site.</p>
+            <div class="age-buttons">
+                <button id="confirm-age" class="age-button confirm" aria-label="Confirm I am 18 or older">I am 18 or older</button>
+                <button id="deny-age" class="age-button deny" aria-label="I am under 18">I am under 18</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-consent-banner" class="cookie-consent-banner" style="display: none;" role="dialog" aria-labelledby="cookie-title" aria-describedby="cookie-desc">
+        <div class="cookie-consent-content">
+            <p id="cookie-desc">This website uses cookies to enhance your experience. By continuing to use this site, you agree to our use of cookies.</p>
+            <div class="cookie-buttons">
+                <a href="privacy.html" class="cookie-link" aria-label="Read our privacy policy">Privacy Policy</a>
+                <button id="accept-cookies" class="cookie-accept-btn" aria-label="Accept cookies and close this banner">Accept</button>
+            </div>
+        </div>
+    </div>
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="/">Blueberry</a>
+            </div>
+            <search-bar></search-bar>
+            <button class="hamburger" id="hamburger-menu" aria-label="Open navigation menu" aria-expanded="false">☰</button>
+        </nav>
+    </header>
+
+    <navigation-drawer id="nav-drawer"></navigation-drawer>
+
+    <error-boundary id="main-error-boundary">
+        <main id="main-content">
+            <section class="hero">
+                <div class="featured-video parallax-bg" id="featured-video">
+                    <!-- Featured video will be dynamically inserted here -->
+                </div>
+            </section>
+
+            <section class="video-grid">
+                <h2>Trending</h2>
+                <error-boundary>
+                    <div class="grid-container" id="trending-grid">
+                        <!-- Video thumbnails will be dynamically inserted here -->
+                    </div>
+                </error-boundary>
+            </section>
+
+            <section class="video-grid">
+                <h2>New Releases</h2>
+                <error-boundary>
+                    <div class="grid-container" id="new-releases-grid">
+                        <!-- Video thumbnails will be dynamically inserted here -->
+                    </div>
+                </error-boundary>
+            </section>
+
+            <section class="video-grid">
+                <h2>Featured Categories</h2>
+                <error-boundary>
+                    <div class="grid-container" id="featured-categories-grid">
+                        <!-- Category thumbnails will be dynamically inserted here -->
+                    </div>
+                </error-boundary>
+            </section>
+        </main>
+    </error-boundary>
+
+    <footer>
+        <p>&copy; 2025 Blueberry. All rights reserved. | <a href="terms.html">Terms of Service</a> | <a href="privacy.html">Privacy Policy</a></p>
+        <p>Blueberry displays embedded videos from Pornhub and is not for content creators.</p>
+    
