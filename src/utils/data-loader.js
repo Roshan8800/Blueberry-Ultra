@@ -1,4 +1,4 @@
-// src/utils/data-loader.js
+ // src/utils/data-loader.js
 // Utility to load and search video data
 
 let allVideos = null;
@@ -10,55 +10,71 @@ export async function loadAllVideos() {
     let loadedCount = 0;
     let failedCount = 0;
 
+    // Create promises for parallel loading
+    const promises = [];
     for (let i = 0; i <= 46; i++) {
-        try {
-            const response = await fetch(`data/data_${i}.json`, {
+        promises.push(
+            fetch(`data/data_${i}.json`, {
                 timeout: 10000 // 10 second timeout
-            });
-
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-            }
-
-            const data = await response.json();
-
-            if (!Array.isArray(data)) {
-                throw new Error('Invalid data format: expected array');
-            }
-
-            const videos = data.map((video, index) => {
-                try {
-                    const parts = video.embed.split('|');
-                    return {
-                        id: `${i}_${index}`, // Unique ID: file_index
-                        title: parts[3] || 'Untitled',
-                        thumbnail: parts[1] || '',
-                        embed: parts[0] || '',
-                        tags: parts[4] ? parts[4].split(';') : [],
-                        categories: parts[5] ? parts[5].split(';') : [],
-                        performer: parts[6] || '',
-                        duration: parts[7] || '',
-                        views: parts[8] || '',
-                        likes: parts[9] || '',
-                        dislikes: parts[10] || ''
-                    };
-                } catch (parseError) {
-                    console.warn(`Error parsing video ${i}_${index}:`, parseError);
-                    return null;
+            })
+            .then(async response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
                 }
-            }).filter(video => video !== null);
 
-            allVideos.push(...videos);
+                const data = await response.json();
+
+                if (!Array.isArray(data)) {
+                    throw new Error('Invalid data format: expected array');
+                }
+
+                const videos = data.map((video, index) => {
+                    try {
+                        const parts = video.embed.split('|');
+                        return {
+                            id: `${i}_${index}`, // Unique ID: file_index
+                            title: parts[3] || 'Untitled',
+                            thumbnail: parts[1] || '',
+                            embed: parts[0] || '',
+                            tags: parts[4] ? parts[4].split(';') : [],
+                            categories: parts[5] ? parts[5].split(';') : [],
+                            performer: parts[6] || '',
+                            duration: parts[7] || '',
+                            views: parts[8] || '',
+                            likes: parts[9] || '',
+                            dislikes: parts[10] || ''
+                        };
+                    } catch (parseError) {
+                        console.warn(`Error parsing video ${i}_${index}:`, parseError);
+                        return null;
+                    }
+                }).filter(video => video !== null);
+
+                return videos;
+            })
+            .catch(error => {
+                console.error(`Error loading data_${i}.json:`, error);
+                return null; // Return null for failed loads
+            })
+        );
+    }
+
+    // Wait for all promises to settle
+    const results = await Promise.allSettled(promises);
+
+    // Process results
+    results.forEach(result => {
+        if (result.status === 'fulfilled' && result.value !== null) {
+            allVideos.push(...result.value);
             loadedCount++;
-        } catch (error) {
-            console.error(`Error loading data_${i}.json:`, error);
+        } else {
             failedCount++;
-
-            // If more than half the files fail, this might be a network issue
-            if (failedCount > 23) { // More than half of 46 files
-                throw new Error('Unable to load video data. Please check your internet connection and try again.');
-            }
         }
+    });
+
+    // If more than half the files fail, this might be a network issue
+    if (failedCount > 23) { // More than half of 46 files
+        throw new Error('Unable to load video data. Please check your internet connection and try again.');
     }
 
     if (allVideos.length === 0) {

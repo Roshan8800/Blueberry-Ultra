@@ -212,6 +212,21 @@ class NavigationDrawer extends HTMLElement {
         this.isOpen = false;
         this.currentUser = null;
 
+        // Store event handlers for cleanup
+        this.backdropClickHandler = () => this.close();
+        this.closeBtnClickHandler = () => this.close();
+        this.keydownHandler = (e) => {
+            if (e.key === 'Escape') {
+                this.close();
+            }
+            this.trapFocus(e);
+        };
+        this.transitionEndHandler = () => {
+            if (this.isOpen) {
+                this.focusFirstElement();
+            }
+        };
+
         this.init();
     }
 
@@ -224,23 +239,14 @@ class NavigationDrawer extends HTMLElement {
         });
 
         // Event listeners
-        this.backdrop.addEventListener('click', () => this.close());
-        this.closeBtn.addEventListener('click', () => this.close());
+        this.backdrop.addEventListener('click', this.backdropClickHandler);
+        this.closeBtn.addEventListener('click', this.closeBtnClickHandler);
 
         // Keyboard navigation
-        this.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                this.close();
-            }
-            this.trapFocus(e);
-        });
+        this.addEventListener('keydown', this.keydownHandler);
 
         // Focus management
-        this.addEventListener('transitionend', () => {
-            if (this.isOpen) {
-                this.focusFirstElement();
-            }
-        });
+        this.addEventListener('transitionend', this.transitionEndHandler);
     }
 
     open() {
@@ -304,7 +310,7 @@ class NavigationDrawer extends HTMLElement {
             const logoutBtn = document.createElement('button');
             logoutBtn.className = 'logout-btn';
             logoutBtn.textContent = 'Logout';
-            logoutBtn.addEventListener('click', async () => {
+            this.logoutClickHandler = async () => {
                 try {
                     await logout();
                     this.close();
@@ -313,7 +319,8 @@ class NavigationDrawer extends HTMLElement {
                 } catch (error) {
                     console.error('Logout failed:', error);
                 }
-            });
+            };
+            logoutBtn.addEventListener('click', this.logoutClickHandler);
             this.shadowRoot.querySelector('.nav-links ul').appendChild(logoutBtn);
         } else {
             this.profileLink.style.display = 'none';
@@ -360,6 +367,9 @@ class NavigationDrawer extends HTMLElement {
     connectedCallback() {
         this.setAttribute('aria-hidden', 'true');
     }
-}
 
-customElements.define('navigation-drawer', NavigationDrawer);
+    disconnectedCallback() {
+        // Remove event listeners
+        this.backdrop.removeEventListener('click', this.backdropClickHandler);
+        this.closeBtn.removeEventListener('click', this.closeBtnClickHandler);
+      

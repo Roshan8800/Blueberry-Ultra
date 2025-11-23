@@ -72,6 +72,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Get current video
     const currentVideo = videos[index] || videos[0];
     // Add id for recommendations
+    const videoId = `${file}_${index}`;
     currentVideo.id = videoId;
 
     // Populate video player
@@ -80,7 +81,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Add to watch history
     let user = getCurrentUser();
-    const videoId = `${file}_${index}`;
     if (user) {
         addToWatchHistory(user.uid, videoId);
     } else {

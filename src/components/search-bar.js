@@ -1,6 +1,19 @@
 // src/components/search-bar.js
 import { loadAllVideos } from '../utils/data-loader.js';
 
+// Simple debounce utility
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
 class SearchBar extends HTMLElement {
     constructor() {
         super();
@@ -18,6 +31,24 @@ class SearchBar extends HTMLElement {
         this.render();
         this.loadSuggestions();
         this.setupEventListeners();
+    }
+
+    disconnectedCallback() {
+        // Note: Event listeners are added to shadow DOM elements, cleanup would require storing references
+        // For now, relying on garbage collection when component is removed
+    }
+
+    fuzzyMatch(text, query) {
+        const textLower = text.toLowerCase();
+        const queryLower = query.toLowerCase();
+        // Simple fuzzy match: check if all query characters appear in order in text
+        let queryIndex = 0;
+        for (let i = 0; i < textLower.length && queryIndex < queryLower.length; i++) {
+            if (textLower[i] === queryLower[queryIndex]) {
+                queryIndex++;
+            }
+        }
+        return queryIndex === queryLower.length;
     }
 
     render() {
@@ -309,26 +340,4 @@ class SearchBar extends HTMLElement {
                 autocompleteDropdown.innerHTML = this.currentSuggestions
                     .map((suggestion, index) => {
                         const typeLabel = suggestion.type.charAt(0).toUpperCase() + suggestion.type.slice(1);
-                        return `<li class="autocomplete-item ${index === this.selectedIndex ? 'selected' : ''}" data-type="${suggestion.type}" data-value="${suggestion.value}" role="option" aria-selected="${index === this.selectedIndex}"><strong>${typeLabel}:</strong> ${suggestion.value}</li>`;
-                    })
-                    .join('');
-                autocompleteDropdown.style.display = 'block';
-            } else {
-                autocompleteDropdown.style.display = 'none';
-                this.selectedIndex = -1;
-            }
-        });
-
-        // Autocomplete item click
-        autocompleteDropdown.addEventListener('click', (e) => {
-            if (e.target.classList.contains('autocomplete-item')) {
-                const value = e.target.dataset.value;
-                input.value = value;
-                autocompleteDropdown.style.display = 'none';
-                this.selectedIndex = -1;
-                input.setAttribute('aria-expanded', 'false');
-                this.navigateToSearch(value);
-            }
-        });
-
-        // Hide dro
+                        return `<li class="autocompl

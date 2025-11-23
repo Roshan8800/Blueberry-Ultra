@@ -201,9 +201,8 @@ async function saveParentalControls() {
                     return;
                 }
             }
+// Hash and store new PIN
+settings.parentalPinHash = await hashPIN(newPin);
+}
 
-            // Hash and store new PIN
-            settings.parentalPinHash = await hashPIN(newPin);
-        }
-
- 
+localStorage.setItem('blueberry-se

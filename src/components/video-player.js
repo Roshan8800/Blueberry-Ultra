@@ -202,6 +202,13 @@ class VideoPlayer extends HTMLElement {
         this.adapter = new IframeVideoAdapter(this.iframe);
         this.domain = new VideoPlayerDomain(this.adapter);
 
+        // Store event handlers for cleanup
+        this.playPauseHandler = () => this.domain.togglePlayPause();
+        this.progressHandler = (e) => this.domain.seek(e.target.value);
+        this.volumeBtnHandler = () => this.domain.toggleMute();
+        this.volumeSliderHandler = (e) => this.domain.setVolume(e.target.value);
+        this.fullscreenHandler = () => this.domain.toggleFullscreen();
+
         this.addEventListeners();
     }
 
@@ -216,11 +223,20 @@ class VideoPlayer extends HTMLElement {
     }
 
     addEventListeners() {
-        this.playPauseBtn.addEventListener('click', () => this.domain.togglePlayPause());
-        this.progressBar.addEventListener('input', (e) => this.domain.seek(e.target.value));
-        this.volumeBtn.addEventListener('click', () => this.domain.toggleMute());
-        this.volumeSlider.addEventListener('input', (e) => this.domain.setVolume(e.target.value));
-        this.fullscreenBtn.addEventListener('click', () => this.domain.toggleFullscreen());
+        this.playPauseBtn.addEventListener('click', this.playPauseHandler);
+        this.progressBar.addEventListener('input', this.progressHandler);
+        this.volumeBtn.addEventListener('click', this.volumeBtnHandler);
+        this.volumeSlider.addEventListener('input', this.volumeSliderHandler);
+        this.fullscreenBtn.addEventListener('click', this.fullscreenHandler);
+    }
+
+    disconnectedCallback() {
+        // Remove event listeners
+        this.playPauseBtn.removeEventListener('click', this.playPauseHandler);
+        this.progressBar.removeEventListener('input', this.progressHandler);
+        this.volumeBtn.removeEventListener('click', this.volumeBtnHandler);
+        this.volumeSlider.removeEventListener('input', this.volumeSliderHandler);
+        this.fullscreenBtn.removeEventListener('click', this.fullscreenHandler);
     }
 }
 
